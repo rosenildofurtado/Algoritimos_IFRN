@@ -1,0 +1,81 @@
+
+
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+struct Aluno{
+    char nome[80];
+    int idade;
+    struct Aluno *proximo;
+};
+
+struct ListaLigadaNo {
+	int elemento;
+	struct ListaLigadaNo *proximo;
+};
+
+struct ListaLigadaNo *primeiroParaUltimo(struct ListaLigadaNo *inicio){
+    struct ListaLigadaNo *endInicio;
+    struct ListaLigadaNo *ultimo;
+    endInicio = inicio->proximo;
+    ultimo = inicio;
+    
+    if(inicio == NULL){
+        
+        return inicio;
+    }
+    if(inicio->proximo == NULL){
+        return inicio;
+    }
+    
+    else{
+        
+        while(inicio->proximo != NULL){
+           inicio = inicio->proximo;
+        }
+        
+    }
+    
+    free(inicio);
+    return endInicio;
+}
+
+int main()
+{
+    
+    
+    struct ListaLigadaNo *inicio;
+    struct ListaLigadaNo *no1;
+    struct ListaLigadaNo *no2;
+    struct ListaLigadaNo *no3;
+    
+    no1 = (struct ListaLigadaNo* )malloc(sizeof(struct ListaLigadaNo));
+    no2 = (struct ListaLigadaNo* )malloc(sizeof(struct ListaLigadaNo));
+    no3 = (struct ListaLigadaNo* )malloc(sizeof(struct ListaLigadaNo));
+    
+    inicio = no1;
+    no1->elemento = 3;
+    no1->proximo = no2;
+    no2->elemento = 5;
+    no2->proximo = no3;
+    no3->elemento = 4;
+    
+    struct ListaLigadaNo *imp;
+    imp = inicio;
+    
+    while(imp != NULL){
+        printf("%d, ", imp->elemento);
+           imp = imp->proximo;
+        }
+        
+    imp = primeiroParaUltimo(inicio);
+   
+   while(imp != NULL){
+        printf("\n%d, ", imp->elemento);
+           imp = imp->proximo;
+        }
+
+    return 0;
+}
+
